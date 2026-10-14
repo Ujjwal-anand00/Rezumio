@@ -13,7 +13,7 @@ import {
   TailoredResumeResponse,
 } from "./types";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_API_URL || "http://localhost:8000";
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
@@ -244,11 +244,11 @@ export async function tailorResumeStream(
         try {
           const prog = JSON.parse(dataStr);
           onProgress(prog.step, prog.message, prog.percent);
-        } catch {}
+        } catch { }
       } else if (eventType === "complete" && dataStr) {
         try {
           completedData = JSON.parse(dataStr);
-        } catch {}
+        } catch { }
       } else if (eventType === "error") {
         try {
           const err = JSON.parse(dataStr);
@@ -286,7 +286,7 @@ export async function generateCoverLetter(payload: {
     try {
       const data = await res.json();
       err = data.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -360,7 +360,7 @@ export async function saveVersion(
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -392,7 +392,7 @@ export async function updateVersion(
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -421,7 +421,7 @@ export async function duplicateVersion(
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -441,7 +441,7 @@ export async function getVersion(id: string, token?: string): Promise<ResumeVers
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -467,7 +467,7 @@ export async function deleteVersion(id: string, token?: string): Promise<void> {
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
 }
@@ -494,7 +494,7 @@ export async function registerOriginalResume(
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -515,7 +515,7 @@ export async function registerUser(email: string, password: string, fullName?: s
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -532,7 +532,7 @@ export async function loginUser(email: string, password: string): Promise<AuthTo
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -568,7 +568,7 @@ export async function saveCoverLetter(
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
   return await res.json();
@@ -601,7 +601,7 @@ export async function deleteCoverLetter(id: string, token?: string): Promise<voi
     try {
       const d = await res.json();
       err = d.detail || err;
-    } catch {}
+    } catch { }
     throw new ApiError(res.status, err);
   }
 }
