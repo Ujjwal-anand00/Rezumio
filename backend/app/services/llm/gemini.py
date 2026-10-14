@@ -1,7 +1,8 @@
+from __future__ import annotations
 import asyncio
 import json
 import logging
-from typing import Optional
+from typing import Any, Dict, List, Optional, Union
 from google import genai
 from google.genai import types
 from fastapi import HTTPException, status
