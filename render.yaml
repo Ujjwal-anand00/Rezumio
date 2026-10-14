@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: resume-customizer-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: PROJECT_NAME
+        value: Resume Customizer API
+      - key: API_V1_PREFIX
+        value: /api
+      - key: HOST
+        value: 0.0.0.0
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_TIMEOUT_SECONDS
+        value: 45
+      - key: GEMINI_MAX_RETRIES
+        value: 3
+      - key: MAX_FILE_SIZE_MB
+        value: 5
+      - key: ALLOWED_EXTENSIONS
+        value: '[".pdf", ".docx"]'
+      - key: CORS_ORIGINS
+        value: '["http://localhost:3000","https://your-vercel-app.vercel.app"]'
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
